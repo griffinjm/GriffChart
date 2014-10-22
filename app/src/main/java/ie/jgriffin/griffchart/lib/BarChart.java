@@ -1,6 +1,8 @@
 package ie.jgriffin.griffchart.lib;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -10,6 +12,7 @@ import android.view.View;
 public class BarChart extends View {
 
     private int viewWidth, viewHeight;
+    private int backgroundColor = Color.WHITE;
 
     public BarChart(Context context) {
         super(context);
@@ -36,4 +39,22 @@ public class BarChart extends View {
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        drawBackground(canvas);
+    }
+
+
+    private void drawBackground(Canvas canvas) {
+        canvas.drawColor(backgroundColor);
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
 }
