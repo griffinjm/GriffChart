@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by JGriffin on 22/10/2014.
  */
@@ -13,6 +15,8 @@ public class BarChart extends View {
 
     private int viewWidth, viewHeight;
     private int backgroundColor = Color.WHITE;
+
+    private ArrayList<ChartPoint> chartPoints = new ArrayList<ChartPoint>();
 
     public BarChart(Context context) {
         super(context);
@@ -56,5 +60,13 @@ public class BarChart extends View {
 
     public void setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
+    }
+
+    public ArrayList<ChartPoint> getChartPoints() {
+        return chartPoints;
+    }
+
+    public void setChartPoints(ArrayList<ChartPoint> chartPoints) {
+        this.chartPoints = chartPoints;
     }
 }
