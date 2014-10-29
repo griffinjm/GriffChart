@@ -9,8 +9,16 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <TextView
-        android:text="@string/hello_world"
+        android:text="@string/barchart"
+        android:id="@+id/tvBarChart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
+    <ie.jgriffin.griffchart.lib.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvBarChart" />
 
 </RelativeLayout>
