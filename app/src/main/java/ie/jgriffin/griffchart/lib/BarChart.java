@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class BarChart extends View {
 
-    public int edgeWidth = 1;
+    private int edgeWidth = 1;
     private int viewWidth, viewHeight;
     private int backgroundColor = Color.WHITE;
 
@@ -79,6 +79,10 @@ public class BarChart extends View {
         canvas.drawLine(viewWidth - edgeWidth, edgeWidth, viewWidth - edgeWidth, viewHeight - edgeWidth, edgePaint);
     }
 
+    public void redraw(){
+        invalidate();
+    }
+
     public int getBackgroundColor() {
         return backgroundColor;
     }
@@ -95,7 +99,7 @@ public class BarChart extends View {
         this.chartPoints = chartPoints;
     }
 
-    public  int getEdgeWidth() {
+    public int getEdgeWidth() {
         return edgeWidth;
     }
 
@@ -110,4 +114,7 @@ public class BarChart extends View {
     public void setEdgePaint(Paint edgePaint) {
         this.edgePaint = edgePaint;
     }
+
+
+
 }
