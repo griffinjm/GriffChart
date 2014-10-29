@@ -3,6 +3,7 @@ package ie.jgriffin.griffchart.lib;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -16,18 +17,23 @@ public class BarChart extends View {
     private int viewWidth, viewHeight;
     private int backgroundColor = Color.WHITE;
 
+    private Paint blackFillPaint;
+
     private ArrayList<ChartPoint> chartPoints = new ArrayList<ChartPoint>();
 
     public BarChart(Context context) {
         super(context);
+        initPaints();
     }
 
     public BarChart(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initPaints();
     }
 
     public BarChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initPaints();
     }
 
     @Override
@@ -47,11 +53,29 @@ public class BarChart extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawBackground(canvas);
+        drawEdge(canvas);
+    }
+
+    private void initPaints() {
+        blackFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        blackFillPaint.setColor(Color.BLACK);
+        blackFillPaint.setStyle(Paint.Style.FILL);
     }
 
 
     private void drawBackground(Canvas canvas) {
         canvas.drawColor(backgroundColor);
+    }
+
+    private void drawEdge(Canvas canvas) {
+        //top
+        canvas.drawLine(1, 1, viewWidth - 1, 1, blackFillPaint);
+        //left
+        canvas.drawLine(1, 1, 1, viewHeight - 1, blackFillPaint);
+        //bottom
+        canvas.drawLine(1, viewHeight - 1, viewWidth - 1, viewHeight - 1, blackFillPaint);
+        //right
+        canvas.drawLine(viewWidth - 1, 1, viewWidth - 1, viewHeight - 1, blackFillPaint);
     }
 
     public int getBackgroundColor() {
