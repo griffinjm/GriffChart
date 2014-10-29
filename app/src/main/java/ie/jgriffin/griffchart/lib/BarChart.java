@@ -14,10 +14,11 @@ import java.util.ArrayList;
  */
 public class BarChart extends View {
 
+    public int edgeWidth = 1;
     private int viewWidth, viewHeight;
     private int backgroundColor = Color.WHITE;
 
-    private Paint blackFillPaint;
+    private Paint edgePaint;
 
     private ArrayList<ChartPoint> chartPoints = new ArrayList<ChartPoint>();
 
@@ -57,9 +58,9 @@ public class BarChart extends View {
     }
 
     private void initPaints() {
-        blackFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        blackFillPaint.setColor(Color.BLACK);
-        blackFillPaint.setStyle(Paint.Style.FILL);
+        edgePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        edgePaint.setColor(Color.BLACK);
+        edgePaint.setStyle(Paint.Style.FILL);
     }
 
 
@@ -69,13 +70,13 @@ public class BarChart extends View {
 
     private void drawEdge(Canvas canvas) {
         //top
-        canvas.drawLine(1, 1, viewWidth - 1, 1, blackFillPaint);
+        canvas.drawLine(edgeWidth, edgeWidth, viewWidth - edgeWidth, edgeWidth, edgePaint);
         //left
-        canvas.drawLine(1, 1, 1, viewHeight - 1, blackFillPaint);
+        canvas.drawLine(edgeWidth, edgeWidth, edgeWidth, viewHeight - edgeWidth, edgePaint);
         //bottom
-        canvas.drawLine(1, viewHeight - 1, viewWidth - 1, viewHeight - 1, blackFillPaint);
+        canvas.drawLine(edgeWidth, viewHeight - edgeWidth, viewWidth - edgeWidth, viewHeight - edgeWidth, edgePaint);
         //right
-        canvas.drawLine(viewWidth - 1, 1, viewWidth - 1, viewHeight - 1, blackFillPaint);
+        canvas.drawLine(viewWidth - edgeWidth, edgeWidth, viewWidth - edgeWidth, viewHeight - edgeWidth, edgePaint);
     }
 
     public int getBackgroundColor() {
@@ -92,5 +93,21 @@ public class BarChart extends View {
 
     public void setChartPoints(ArrayList<ChartPoint> chartPoints) {
         this.chartPoints = chartPoints;
+    }
+
+    public  int getEdgeWidth() {
+        return edgeWidth;
+    }
+
+    public void setEDGE_WIDTH(int EDGE_WIDTH) {
+        this.edgeWidth = EDGE_WIDTH;
+    }
+
+    public Paint getEdgePaint() {
+        return edgePaint;
+    }
+
+    public void setEdgePaint(Paint edgePaint) {
+        this.edgePaint = edgePaint;
     }
 }
