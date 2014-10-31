@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
@@ -72,27 +72,29 @@ public class MainActivity extends ActionBarActivity {
         public void onResume() {
             super.onResume();
             BarChart chart = (BarChart) getView().findViewById(R.id.barChart);
+            fillChart(chart);
+        }
 
+        private void fillChart(BarChart chart) {
             Random random = new Random();
             ArrayList<ChartPoint> points = new ArrayList<ChartPoint>();
 
-            for(int i = 0; i <= 20; i++){
+            for (int i = 0; i <= 20; i++) {
                 addRandomPoint(points, random);
             }
 
             chart.setChartPoints(points);
         }
 
-        private void addRandomPoint(ArrayList<ChartPoint> points, Random random){
+        private void addRandomPoint(ArrayList<ChartPoint> points, Random random) {
             points.add(new ChartPoint(getRandomIntToOneHundred(random), getRandomPaint(random)));
         }
 
-        private int getRandomIntToOneHundred(Random random){
+        private int getRandomIntToOneHundred(Random random) {
             return random.nextInt(101);
         }
 
-        private Paint getRandomPaint(Random random){
-
+        private Paint getRandomPaint(Random random) {
             Paint p = new Paint();
             p.setAntiAlias(true);
             p.setARGB(random.nextInt(256), random.nextInt(256), random.nextInt(256), random.nextInt(256));
