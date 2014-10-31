@@ -14,9 +14,11 @@ import java.util.ArrayList;
  */
 public class BarChart extends View {
 
-    private int edgeWidth = 1;
+    private float edgeWidth = 1f;
     private int viewWidth, viewHeight;
     private int backgroundColor = Color.WHITE;
+
+    private float chartTopBound, chartBottomBound, chartLeftBound, chartRightBound, chartBoundPadding = 5f;
 
     private Paint edgePaint;
 
@@ -55,12 +57,20 @@ public class BarChart extends View {
         super.onDraw(canvas);
         drawBackground(canvas);
         drawEdge(canvas);
+        initChartBounds();
     }
 
     private void initPaints() {
         edgePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         edgePaint.setColor(Color.BLACK);
         edgePaint.setStyle(Paint.Style.FILL);
+    }
+
+    private void initChartBounds(){
+        chartTopBound = chartBoundPadding;
+        chartBottomBound = viewHeight - chartBoundPadding;
+        chartLeftBound = chartBoundPadding;
+        chartRightBound = viewWidth - chartBoundPadding;
     }
 
 
@@ -99,12 +109,12 @@ public class BarChart extends View {
         this.chartPoints = chartPoints;
     }
 
-    public int getEdgeWidth() {
+    public float getEdgeWidth() {
         return edgeWidth;
     }
 
-    public void setEDGE_WIDTH(int EDGE_WIDTH) {
-        this.edgeWidth = EDGE_WIDTH;
+    public void setEdgeWidth(float edgeWidth) {
+        this.edgeWidth = edgeWidth;
     }
 
     public Paint getEdgePaint() {
