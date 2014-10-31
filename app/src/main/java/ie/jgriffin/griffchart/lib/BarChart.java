@@ -19,6 +19,11 @@ public class BarChart extends View {
     private int backgroundColor = Color.WHITE;
 
     private float chartTopBound, chartBottomBound, chartLeftBound, chartRightBound, chartBoundPadding = 5f;
+    private float chartVerticalSize, chartHorizontalSize;
+    private float barPadding = 1f, barWidth, halfBarWidth;
+    private int barCount;
+    private float dataMax = 100f, scalingFactorBar;
+
 
     private Paint edgePaint;
 
@@ -55,9 +60,15 @@ public class BarChart extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        initChartBounds();
         drawBackground(canvas);
         drawEdge(canvas);
-        initChartBounds();
+
+        if(!chartPoints.isEmpty()){
+            initBarBounds();
+            drawBars(canvas);
+        }
+
     }
 
     private void initPaints() {
@@ -71,6 +82,37 @@ public class BarChart extends View {
         chartBottomBound = viewHeight - chartBoundPadding;
         chartLeftBound = chartBoundPadding;
         chartRightBound = viewWidth - chartBoundPadding;
+        chartVerticalSize = chartBottomBound - chartTopBound;
+        chartHorizontalSize = chartRightBound - chartLeftBound;
+    }
+
+    private void initBarBounds(){
+        barCount = chartPoints.size();
+        barWidth = (chartHorizontalSize - (barPadding * (barCount))) / barCount;
+        halfBarWidth = barWidth / 2;
+        scalingFactorBar = chartVerticalSize / dataMax;
+    }
+
+    private void drawBars(Canvas canvas) {
+        for (int i = 0; i < chartPoints.size(); i++) {
+            ChartPoint point = chartPoints.get(i);
+            float[] rectBounds = calcRectBarWithOffset(i, point.getValue());
+            canvas.drawRect(rectBounds[0], rectBounds[1], rectBounds[2], rectBounds[3], point.getPaint());
+        }
+    }
+
+    private float[] calcRectBarWithOffset(int i, int value) {
+        //don't draw higher than top of axis/background
+        if (value > dataMax) {
+            value = (int) dataMax;
+        }
+
+        float bottom = chartBottomBound;
+        float top = bottom - (value * scalingFactorBar);
+        float left = chartLeftBound + ((barPadding + barWidth) * i);
+        float right = left + barWidth;
+
+        return new float[]{left, top, right, bottom};
     }
 
 
