@@ -1,5 +1,7 @@
 package ie.jgriffin.griffchart;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import ie.jgriffin.griffchart.lib.BarChart;
+import ie.jgriffin.griffchart.lib.ChartPoint;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -59,6 +66,38 @@ public class MainActivity extends ActionBarActivity {
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            BarChart chart = (BarChart) getView().findViewById(R.id.barChart);
+
+            Random random = new Random();
+            ArrayList<ChartPoint> points = new ArrayList<ChartPoint>();
+
+            for(int i = 0; i <= 20; i++){
+                addRandomPoint(points, random);
+            }
+
+            chart.setChartPoints(points);
+        }
+
+        private void addRandomPoint(ArrayList<ChartPoint> points, Random random){
+            points.add(new ChartPoint(getRandomIntToOneHundred(random), getRandomPaint(random)));
+        }
+
+        private int getRandomIntToOneHundred(Random random){
+            return random.nextInt(101);
+        }
+
+        private Paint getRandomPaint(Random random){
+
+            Paint p = new Paint();
+            p.setAntiAlias(true);
+            p.setARGB(random.nextInt(256), random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            p.setStyle(Paint.Style.FILL);
+            return p;
         }
     }
 }

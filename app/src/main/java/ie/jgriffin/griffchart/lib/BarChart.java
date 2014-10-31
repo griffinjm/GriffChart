@@ -149,6 +149,7 @@ public class BarChart extends View {
 
     public void setChartPoints(ArrayList<ChartPoint> chartPoints) {
         this.chartPoints = chartPoints;
+        invalidate();
     }
 
     public float getEdgeWidth() {
