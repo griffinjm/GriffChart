@@ -56,8 +56,9 @@ public class MainActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment implements View.OnClickListener{
 
+        private BarChart chart;
         public PlaceholderFragment() {
         }
 
@@ -71,11 +72,12 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onResume() {
             super.onResume();
-            BarChart chart = (BarChart) getView().findViewById(R.id.barChart);
-            fillChart(chart);
+            chart = (BarChart) getView().findViewById(R.id.barChart);
+            chart.setOnClickListener(this);
+            fillChart();
         }
 
-        private void fillChart(BarChart chart) {
+        private void fillChart() {
             Random random = new Random();
             ArrayList<ChartPoint> points = new ArrayList<ChartPoint>();
 
@@ -83,7 +85,9 @@ public class MainActivity extends ActionBarActivity {
                 addRandomPoint(points, random);
             }
 
-            chart.setChartPoints(points);
+            if(chart != null){
+                chart.setChartPoints(points);
+            }
         }
 
         private void addRandomPoint(ArrayList<ChartPoint> points, Random random) {
@@ -100,6 +104,15 @@ public class MainActivity extends ActionBarActivity {
             p.setARGB(random.nextInt(256), random.nextInt(256), random.nextInt(256), random.nextInt(256));
             p.setStyle(Paint.Style.FILL);
             return p;
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.barChart:
+                    fillChart();
+                    break;
+            }
         }
     }
 }
