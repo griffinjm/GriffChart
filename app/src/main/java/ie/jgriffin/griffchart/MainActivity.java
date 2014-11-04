@@ -101,7 +101,7 @@ public class MainActivity extends ActionBarActivity {
         private Paint getRandomPaint(Random random) {
             Paint p = new Paint();
             p.setAntiAlias(true);
-            p.setARGB(random.nextInt(256), random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            p.setARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
             p.setStyle(Paint.Style.FILL);
             return p;
         }
