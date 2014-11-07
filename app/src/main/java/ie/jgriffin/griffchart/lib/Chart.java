@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Chart extends View {
 
+
     protected float edgeWidth = 1f;
     protected int viewWidth, viewHeight;
     protected int backgroundColor = Color.WHITE;
