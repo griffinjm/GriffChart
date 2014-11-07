@@ -21,6 +21,7 @@ public class Chart extends View {
 
     protected float chartTopBound, chartBottomBound, chartLeftBound, chartRightBound, chartBoundPadding = 5f;
     protected float chartVerticalSize, chartHorizontalSize;
+    protected float dataMax = 100f, dataScalingFactor;
 
     protected Paint edgePaint;
 
@@ -105,6 +106,22 @@ public class Chart extends View {
     public void setChartPoints(ArrayList<ChartPoint> chartPoints) {
         this.chartPoints = chartPoints;
         redraw();
+    }
+
+    public float getDataMax() {
+        return dataMax;
+    }
+
+    public void setDataMax(float dataMax) {
+        this.dataMax = dataMax;
+    }
+
+    public float getDataScalingFactor() {
+        return dataScalingFactor;
+    }
+
+    public void setDataScalingFactor(float dataScalingFactor) {
+        this.dataScalingFactor = dataScalingFactor;
     }
 
     public float getEdgeWidth() {

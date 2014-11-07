@@ -13,7 +13,7 @@ public class BarChart extends Chart {
 
     private float barPadding = 1f, barWidth, halfBarWidth;
     private int barCount;
-    private float dataMax = 100f, scalingFactorBar;
+
 
     public BarChart(Context context) {
         super(context);
@@ -41,7 +41,7 @@ public class BarChart extends Chart {
         barCount = chartPoints.size();
         barWidth = (chartHorizontalSize - (barPadding * (barCount))) / barCount;
         halfBarWidth = barWidth / 2;
-        scalingFactorBar = chartVerticalSize / dataMax;
+        dataScalingFactor = chartVerticalSize / dataMax;
     }
 
     private void drawBars(Canvas canvas) {
@@ -59,7 +59,7 @@ public class BarChart extends Chart {
         }
 
         float bottom = chartBottomBound;
-        float top = bottom - (value * scalingFactorBar);
+        float top = bottom - (value * dataScalingFactor);
         float left = chartLeftBound + ((barPadding + barWidth) * i);
         float right = left + barWidth;
 
@@ -74,11 +74,4 @@ public class BarChart extends Chart {
         this.barPadding = barPadding;
     }
 
-    public float getDataMax() {
-        return dataMax;
-    }
-
-    public void setDataMax(float dataMax) {
-        this.dataMax = dataMax;
-    }
 }
