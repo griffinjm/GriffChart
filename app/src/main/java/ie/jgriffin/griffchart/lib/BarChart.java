@@ -41,7 +41,6 @@ public class BarChart extends Chart {
         barCount = chartPoints.size();
         barWidth = (chartHorizontalSize - (barPadding * (barCount))) / barCount;
         halfBarWidth = barWidth / 2;
-        dataScalingFactor = chartVerticalSize / dataMax;
     }
 
     private void drawBars(Canvas canvas) {

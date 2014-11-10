@@ -50,7 +50,6 @@ public class LineChart extends Chart {
         lineDrawingEndPoint = chartRightBound - linePointMargin;
         lineDrawingWidth = lineDrawingEndPoint - lineDrawingStartPoint;
         lineSectionWidth = lineDrawingWidth / pointCount;
-        dataScalingFactor = chartVerticalSize / dataMax;
     }
 
     private void initLinePaint() {

@@ -21,4 +21,22 @@
         android:layout_height="200dp"
         android:layout_below="@+id/tvBarChart" />
 
+    <TextView
+        android:text="@string/linechart"
+        android:id="@+id/tvLineChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/barChart"
+        android:layout_marginTop="20dp" />
+
+    <ie.jgriffin.griffchart.lib.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvLineChart" />
+
+
+
+
 </RelativeLayout>

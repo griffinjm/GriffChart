@@ -97,6 +97,7 @@ public class Chart extends View {
         chartRightBound = viewWidth - chartBoundPadding;
         chartVerticalSize = chartBottomBound - chartTopBound;
         chartHorizontalSize = chartRightBound - chartLeftBound;
+        dataScalingFactor = chartVerticalSize / dataMax;
     }
 
     public ArrayList<ChartPoint> getChartPoints() {
