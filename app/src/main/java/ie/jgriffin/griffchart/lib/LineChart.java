@@ -16,7 +16,7 @@ public class LineChart extends Chart {
     private float lineThickness = 10f;
     private int pointCount;
     private float linePointMargin = 10f;
-    private float lineSectionWidth;
+    private float lineSectionWidth, halfLineSectionWidth;
     private float lineDrawingStartPoint, lineDrawingEndPoint, lineDrawingWidth;
 
     public LineChart(Context context) {
@@ -50,6 +50,7 @@ public class LineChart extends Chart {
         lineDrawingEndPoint = chartRightBound - linePointMargin;
         lineDrawingWidth = lineDrawingEndPoint - lineDrawingStartPoint;
         lineSectionWidth = lineDrawingWidth / pointCount;
+        halfLineSectionWidth = lineSectionWidth / 2;
     }
 
     private void initLinePaint() {
@@ -83,7 +84,7 @@ public class LineChart extends Chart {
 
     private float[] calcLinePoint(int i, int value) {
         float y = chartBottomBound - (value * dataScalingFactor);
-        float x = lineDrawingStartPoint + (lineSectionWidth * i);
+        float x = lineDrawingStartPoint + (lineSectionWidth * i) + halfLineSectionWidth;
         return new float[]{x, y,};
     }
 
