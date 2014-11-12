@@ -1,9 +1,7 @@
 package ie.jgriffin.griffchart;
 
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,13 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import ie.jgriffin.griffchart.lib.BarChart;
 import ie.jgriffin.griffchart.lib.ChartPoint;
+import ie.jgriffin.griffchart.lib.LineChart;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -58,7 +56,8 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment implements View.OnClickListener{
 
-        private BarChart chart;
+        private BarChart barChart;
+        private LineChart lineChart;
         public PlaceholderFragment() {
         }
 
@@ -72,12 +71,15 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onResume() {
             super.onResume();
-            chart = (BarChart) getView().findViewById(R.id.barChart);
-            chart.setOnClickListener(this);
-            fillChart();
+            barChart = (BarChart) getView().findViewById(R.id.barChart);
+            barChart.setOnClickListener(this);
+            lineChart = (LineChart) getView().findViewById(R.id.lineChart);
+            lineChart.setOnClickListener(this);
+            fillBarChart();
+            fillLineChart();
         }
 
-        private void fillChart() {
+        private void fillBarChart() {
             Random random = new Random();
             ArrayList<ChartPoint> points = new ArrayList<ChartPoint>();
 
@@ -85,10 +87,32 @@ public class MainActivity extends ActionBarActivity {
                 addRandomPoint(points, random);
             }
 
-            if(chart != null){
-                chart.setChartPoints(points);
+            if(barChart != null){
+                barChart.setChartPoints(points);
             }
         }
+
+        private void fillLineChart() {
+            Random random = new Random();
+            ArrayList<ChartPoint> points = new ArrayList<ChartPoint>();
+
+            for (int i = 0; i <= 20; i++) {
+                addRandomPoint(points, random);
+            }
+
+            //get first paint from random points
+            //change style to stroke
+            Paint linePaint = points.get(0).getPaint();
+            linePaint.setStyle(Paint.Style.STROKE);
+            lineChart.setLinePaint(linePaint);
+            lineChart.setLineThickness(10f);
+
+            if(lineChart != null){
+                lineChart.setChartPoints(points);
+            }
+        }
+
+
 
         private void addRandomPoint(ArrayList<ChartPoint> points, Random random) {
             points.add(new ChartPoint(getRandomIntToOneHundred(random), getRandomPaint(random)));
@@ -110,7 +134,10 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.barChart:
-                    fillChart();
+                    fillBarChart();
+                    break;
+                case R.id.lineChart:
+                    fillLineChart();
                     break;
             }
         }

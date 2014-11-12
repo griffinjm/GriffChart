@@ -87,4 +87,30 @@ public class LineChart extends Chart {
         return new float[]{x, y,};
     }
 
+    public Paint getLinePaint() {
+        return linePaint;
+    }
+
+    public void setLinePaint(Paint linePaint) {
+        this.linePaint = linePaint;
+        redraw();
+    }
+
+    public float getLineThickness() {
+        return lineThickness;
+    }
+
+    public void setLineThickness(float lineThickness) {
+        this.lineThickness = lineThickness;
+        this.linePaint.setStrokeWidth(this.lineThickness);
+        redraw();
+    }
+
+    public float getLinePointMargin() {
+        return linePointMargin;
+    }
+
+    public void setLinePointMargin(float linePointMargin) {
+        this.linePointMargin = linePointMargin;
+    }
 }
