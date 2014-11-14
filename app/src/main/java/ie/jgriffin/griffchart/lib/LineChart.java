@@ -13,11 +13,12 @@ import android.util.AttributeSet;
 public class LineChart extends Chart {
 
     private Paint linePaint;
-    private float lineThickness = 10f;
+    private float lineThickness = 10f, pointCircleRadius = 16f;
     private int pointCount;
     private float linePointMargin = 10f;
     private float lineSectionWidth, halfLineSectionWidth;
     private float lineDrawingStartPoint, lineDrawingEndPoint, lineDrawingWidth;
+    private boolean drawCirclePoints = true;
 
     public LineChart(Context context) {
         super(context);
@@ -41,6 +42,9 @@ public class LineChart extends Chart {
         if (!chartPoints.isEmpty()) {
             initLineBounds();
             drawLine(canvas);
+            if(drawCirclePoints){
+                drawPoints(canvas);
+            }
         }
     }
 
@@ -60,6 +64,13 @@ public class LineChart extends Chart {
         linePaint.setStrokeWidth(lineThickness);
     }
 
+    private void drawPoints(Canvas canvas){
+        float[][] points = calcPathPoints();
+
+        for(int i = 0; i < points.length; i++){
+            canvas.drawCircle(points[i][0], points[i][1], pointCircleRadius, chartPoints.get(i).getPaint());
+        }
+    }
 
     private void drawLine(Canvas canvas) {
         float[][] pathPoints = calcPathPoints();
@@ -113,5 +124,21 @@ public class LineChart extends Chart {
 
     public void setLinePointMargin(float linePointMargin) {
         this.linePointMargin = linePointMargin;
+    }
+
+    public boolean isDrawCirclePoints() {
+        return drawCirclePoints;
+    }
+
+    public void setDrawCirclePoints(boolean drawCirclePoints) {
+        this.drawCirclePoints = drawCirclePoints;
+    }
+
+    public float getPointCircleRadius() {
+        return pointCircleRadius;
+    }
+
+    public void setPointCircleRadius(float pointCircleRadius) {
+        this.pointCircleRadius = pointCircleRadius;
     }
 }

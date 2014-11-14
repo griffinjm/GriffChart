@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 
             //get first paint from random points
             //change style to stroke
-            Paint linePaint = points.get(0).getPaint();
+            Paint linePaint = new Paint(points.get(0).getPaint());
             linePaint.setStyle(Paint.Style.STROKE);
             lineChart.setLinePaint(linePaint);
             lineChart.setLineThickness(10f);
