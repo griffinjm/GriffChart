@@ -41,9 +41,10 @@ public class LineChart extends Chart {
         super.onDraw(canvas);
         if (!chartPoints.isEmpty()) {
             initLineBounds();
-            drawLine(canvas);
+            float[][] points = calcPathPoints();
+            drawLine(canvas, points);
             if(drawCirclePoints){
-                drawPoints(canvas);
+                drawPoints(canvas, points);
             }
         }
     }
@@ -64,16 +65,13 @@ public class LineChart extends Chart {
         linePaint.setStrokeWidth(lineThickness);
     }
 
-    private void drawPoints(Canvas canvas){
-        float[][] points = calcPathPoints();
-
+    private void drawPoints(Canvas canvas, float[][] points){
         for(int i = 0; i < points.length; i++){
             canvas.drawCircle(points[i][0], points[i][1], pointCircleRadius, chartPoints.get(i).getPaint());
         }
     }
 
-    private void drawLine(Canvas canvas) {
-        float[][] pathPoints = calcPathPoints();
+    private void drawLine(Canvas canvas, float[][] pathPoints) {
         Path path = new Path();
         if (pathPoints.length > 0) {
             path.moveTo(pathPoints[0][0], pathPoints[0][1]);
